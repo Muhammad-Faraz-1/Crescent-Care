@@ -1,4 +1,5 @@
 import 'package:crescent_care/utils/constants.dart';
+// import 'package:crescent_care/utils/slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -66,37 +67,7 @@ class SliderCard extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 3.h,
-              width: 40.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: theme.secondaryContainer,
-              ),
-            ),
-            SizedBox(width: 5.w),
-            Container(
-              height: 3.h,
-              width: 40.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: theme.onTertiary,
-              ),
-            ),
-            SizedBox(width: 5.w),
-            Container(
-              height: 3.h,
-              width: 40.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: theme.onTertiary,
-              ),
-            ),
-          ],
-        ),
+      //  Sliderno(),
       ],
     );
   }

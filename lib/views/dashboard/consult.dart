@@ -1,9 +1,23 @@
 import 'package:crescent_care/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Consultsection extends StatelessWidget {
   const Consultsection({super.key});
+
+
+  Future<void> openWebsite() async {
+    final Uri url = Uri.parse('https://app.fitwellhub.com/auth/login');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.externalApplication, // opens in browser
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,20 +55,23 @@ class Consultsection extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           Center(
-            child: Container(
-              width: 280.w,
-              height: 45.h,
-              decoration: BoxDecoration(
-                color: theme.secondaryContainer,
-                borderRadius: BorderRadius.circular(50.r),
-              ),
-              child: Center(
-                child: TextWidget(
-                  size: medium,
-                  fontWeight: mediumWeight,
-                  lineheight: linesmall,
-                  color: theme.tertiaryContainer,
-                  val: 'Video call a Doctor',
+            child: GestureDetector(
+              onTap: openWebsite,
+              child: Container(
+                width: 280.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: theme.secondaryContainer,
+                  borderRadius: BorderRadius.circular(50.r),
+                ),
+                child: Center(
+                  child: TextWidget(
+                    size: medium,
+                    fontWeight: mediumWeight,
+                    lineheight: linesmall,
+                    color: theme.tertiaryContainer,
+                    val: 'Video call a Doctor',
+                  ),
                 ),
               ),
             ),

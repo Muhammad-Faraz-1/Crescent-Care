@@ -1,7 +1,6 @@
 // import 'package:crescent_care/utils/theme.dart';
 import 'package:flutter/material.dart';
 
-
 class Statemaneger extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.light;
 
@@ -22,4 +21,52 @@ class Statemaneger extends ChangeNotifier {
     _themeMode = ThemeMode.system; // or use custom logic
     notifyListeners();
   }
+
+  // /////////////////
+  // navbar
+  // /////////////////
+  int navbtn = 1;
+  setnavbtn(int id) {
+    navbtn = id;
+    notifyListeners();
+  }
+
+
+
+  // /////////////////
+  // age selector
+  // /////////////////
+  final List<String> ageList = [
+    '29 yrs',
+    '30 yrs',
+    '31 yrs',
+    '32 yrs',
+    '33 yrs',
+    '34 yrs',
+    '35 yrs',
+    '36 yrs',
+    '37 yrs',
+    '38 yrs',
+  ];
+
+  int selectedAgeIndex = 0;
+  PageController? agePageController;
+
+  void initAgeSelector() {
+    selectedAgeIndex = (ageList.length / 2).floor();
+    agePageController = PageController(
+      initialPage: selectedAgeIndex,
+      viewportFraction: 0.22,
+    );
+
+    // Listen to page changes
+    agePageController!.addListener(() {
+      final newIndex = agePageController!.page!.round();
+      if (newIndex != selectedAgeIndex) {
+        selectedAgeIndex = newIndex;
+        notifyListeners();
+      }
+    });
+  }
+  
 }
