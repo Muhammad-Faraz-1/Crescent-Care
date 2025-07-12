@@ -16,6 +16,7 @@ class MyCustomCard extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
     return Container(
       width: MediaQuery.of(context).size.width - 40,
+      // height: 120.h,
       padding: EdgeInsets.all(10.sp),
       margin: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
@@ -29,36 +30,33 @@ class MyCustomCard extends StatelessWidget {
           SizedBox(width: 83.w, child: Image.asset('assets/img/bp-check.png')),
           SizedBox(width: 10.w),
           Flexible(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.sp),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextWidget(
-                    size: body,
-                    fontWeight: mediumWeight,
-                    lineheight: linesmall,
-                    color: theme.tertiaryContainer,
-                    val: 'Have BP/Sugar?',
-                  ),
-                  TextWidget(
-                    size: body,
-                    fontWeight: mediumWeight,
-                    lineheight: linesmall,
-                    color: theme.tertiaryContainer,
-                    val: 'Click here for a',
-                  ),
-                  SizedBox(height: 10.h),
-                  TextWidget(
-                    size: large,
-                    fontWeight: mediumWeight,
-                    lineheight: lineMedium,
-                    color: theme.tertiaryContainer,
-                    val: 'Free 1 Hour Consultation Now',
-                  ),
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextWidget(
+                  size: body,
+                  fontWeight: mediumWeight,
+                  lineheight: linesmall,
+                  color: theme.tertiaryContainer,
+                  val: 'Have BP/Sugar?',
+                ),
+                TextWidget(
+                  size: body,
+                  fontWeight: mediumWeight,
+                  lineheight: linesmall,
+                  color: theme.tertiaryContainer,
+                  val: 'Click here for a',
+                ),
+                SizedBox(height: 10.h),
+                TextWidget(
+                  size: large,
+                  fontWeight: mediumWeight,
+                  lineheight: linesmall,
+                  color: theme.tertiaryContainer,
+                  val: 'Free 1 Hour Consultation Now',
+                ),
+              ],
             ),
           ),
           SizedBox(width: 10.w),
@@ -135,7 +133,7 @@ class _CustomCardCarouselWithIndicatorState
     return Column(
       children: [
         SizedBox(
-          height: 150.h,
+          height: 135.h,
           width: MediaQuery.of(context).size.width - 20,
           child: PageView.builder(
             controller: _controller,

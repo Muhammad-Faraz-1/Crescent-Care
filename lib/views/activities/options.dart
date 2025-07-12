@@ -1,14 +1,18 @@
+import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/constants.dart';
 import 'package:crescent_care/utils/helpsection.dart';
 import 'package:crescent_care/utils/sliders.dart';
+import 'package:crescent_care/views/activities/bmicalculator/bmi-calculator-page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class Options extends StatelessWidget {
   const Options({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<Statemaneger>(context);
     final theme = Theme.of(context).colorScheme;
     return Expanded(
       child: Column(
@@ -16,51 +20,63 @@ class Options extends StatelessWidget {
         children: [
           Column(
             children: [
-              // Cards(),
               CustomCardCarouselWithIndicator(),
               // ////////////////////////////
               SizedBox(height: 20.h),
-      
               // /////////////////////////////
-              Container(
-                width: 320.w,
-                // height: 100.h,
-                padding: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  gradient: LinearGradient(
-                    colors: [theme.onTertiary, theme.primary],
-                  ),
-                ),
+              GestureDetector(
+                onTap: () {
+                  provider.toggleBmiCalculator(true);
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder:
+                          (BuildContext context) => const Bmi_calculator_page(),
+                    ),
+                  );
+                },
                 child: Container(
-                  height: 90.h,
+                  width: 320.w,
+                  // height: 100.h,
+                  padding: EdgeInsets.all(1),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
-                    color: theme.tertiaryContainer,
+                    gradient: LinearGradient(
+                      colors: [theme.onTertiary, theme.primary],
+                    ),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.r),
+                  child: Container(
+                    height: 90.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.r),
+                      color: theme.tertiaryContainer,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10.h,
+                      horizontal: 10.w,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          width: 65.w,
+                          child: Image.asset('assets/img/bmi-cal.png'),
                         ),
-                        width: 65.w,
-                        child: Image.asset('assets/img/bmi-cal.png'),
-                      ),
-                      SizedBox(width: 5.w),
-                      Expanded(
-                        child: TextWidget(
-                          size: large,
-                          fontWeight: semiBold,
-                          lineheight: linesmall,
-                          color: theme.primary,
-                          val: 'BMI Calculator',
+                        SizedBox(width: 5.w),
+                        Expanded(
+                          child: TextWidget(
+                            size: large,
+                            fontWeight: semiBold,
+                            lineheight: linesmall,
+                            color: theme.primary,
+                            val: 'BMI Calculator',
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

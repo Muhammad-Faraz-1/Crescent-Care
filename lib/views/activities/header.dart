@@ -1,13 +1,16 @@
+import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<Statemaneger>(context);
     final theme = Theme.of(context).colorScheme;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
@@ -23,7 +26,15 @@ class Header extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pop();
+                  provider.bmistep > 0
+                      ? provider.bmistepsack()
+                      : {
+                        provider.toggleBmiCalculator(false),
+                        Navigator.of(context).pop(),
+                      };
+                  // Navigator.of(context).pop();
+                  // provider.bmistepsmethod(-1);
+                  // provider.toggleBmiCalculator(false);
                 },
                 child: Transform.flip(
                   child: SvgPicture.asset(
@@ -42,7 +53,7 @@ class Header extends StatelessWidget {
                 fontWeight: mediumWeight,
                 lineheight: lineMedium,
                 color: theme.secondary,
-                val: 'Activities',
+                val: provider.bmiCalculator ? 'BMI Calculator' : 'Activities',
               ),
             ],
           ),

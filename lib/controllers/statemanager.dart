@@ -31,8 +31,6 @@ class Statemaneger extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   // /////////////////
   // age selector
   // /////////////////
@@ -68,5 +66,38 @@ class Statemaneger extends ChangeNotifier {
       }
     });
   }
-  
+
+  // // /////////////////
+  // // bmi calculator
+  // // /////////////////
+  bool bmiCalculator = false;
+  int bmistep = 0;
+  bmistepsforward(int step) {
+    bmistep = step;
+    notifyListeners();
+  }
+  bmistepsack() {
+    bmistep = bmistep - 1;
+    notifyListeners();
+  }
+
+  void toggleBmiCalculator(bool value) {
+    bmiCalculator = value;
+    notifyListeners();
+  }
+
+  // // /////////////////
+  // // height selector
+  // /////////////////
+   final FixedExtentScrollController heightScrollController =
+      FixedExtentScrollController(initialItem: 5);
+
+  int selectedHeightIndex = 5;
+
+  final List<String> heightList = List.generate(61, (i) => '${140 + i} cm');
+
+  void setSelectedHeightIndex(int index) {
+    selectedHeightIndex = index;
+    notifyListeners();
+  }
 }

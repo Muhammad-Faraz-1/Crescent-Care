@@ -71,18 +71,21 @@ class SectionsGrid extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 10),
+                          padding:  EdgeInsets.only(top: 10.h, left: 10.w),
                           child: TextWidget(
                             size: medium,
                             fontWeight: semiBold,
                             lineheight: linesmall,
                             color: theme.primary,
-                            val: 'In Patients',
+                            val: 'In Patient',
                           ),
                         ),
-                        Image.asset(
-                          'assets/img/in-patient.png',
-                          fit: BoxFit.contain,
+                        SizedBox(
+                          width: 75.w,
+                          child: Image.asset(
+                            'assets/img/in-patient.png',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ],
                     ),
@@ -109,18 +112,21 @@ class SectionsGrid extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 10),
+                          padding:  EdgeInsets.only(top: 10.h, left: 10.w),
                           child: TextWidget(
                             size: medium,
                             fontWeight: semiBold,
                             lineheight: linesmall,
                             color: theme.primary,
-                            val: 'Out Patients',
+                            val: 'Out Patient',
                           ),
                         ),
-                        Image.asset(
-                          'assets/img/outpateint.png',
-                          fit: BoxFit.contain,
+                        SizedBox(
+                          width: 75.w,
+                          child: Image.asset(
+                            'assets/img/outpateint.png',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ],
                     ),
