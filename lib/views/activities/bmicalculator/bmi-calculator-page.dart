@@ -32,7 +32,16 @@ class Bmi_calculator_page extends StatelessWidget {
                   ? height_selection_section()
                   : provider.bmistep == 2
                   ? const Weight_calculation()
-                  : BMIResultPage(valuesToShow: ['abc','def','ghi','jkl'], finalBMI: 24.29, statusLabel: 'Overweight', perfectWeight: 60,),
+                  : BMIResultPage(
+                    valuesToShow: [
+                      KeyValue(key: 'Weight', value: '58 KG'),
+                      KeyValue(key: 'Height', value: '5\' 11\''),
+                      KeyValue(key: 'Age', value: '34 Yrs'),
+                    ],
+                    finalBMI: 17.29,
+                    statusLabel: 'Overweight',
+                    perfectWeight: 60,
+                  ),
             ],
           ),
         ),

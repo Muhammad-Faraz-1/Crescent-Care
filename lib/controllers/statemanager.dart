@@ -22,60 +22,23 @@ class Statemaneger extends ChangeNotifier {
     notifyListeners();
   }
 
-  // /////////////////
-  // navbar
-  // /////////////////
+  // -------------------- Navbar --------------------
+
   int navbtn = 1;
   setnavbtn(int id) {
     navbtn = id;
     notifyListeners();
   }
 
-  // /////////////////
-  // age selector
-  // /////////////////
-  final List<String> ageList = [
-    '29 yrs',
-    '30 yrs',
-    '31 yrs',
-    '32 yrs',
-    '33 yrs',
-    '34 yrs',
-    '35 yrs',
-    '36 yrs',
-    '37 yrs',
-    '38 yrs',
-  ];
+  // -------------------- BMI PAGES --------------------
 
-  int selectedAgeIndex = 0;
-  PageController? agePageController;
-
-  void initAgeSelector() {
-    selectedAgeIndex = (ageList.length / 2).floor();
-    agePageController = PageController(
-      initialPage: selectedAgeIndex,
-      viewportFraction: 0.22,
-    );
-
-    // Listen to page changes
-    agePageController!.addListener(() {
-      final newIndex = agePageController!.page!.round();
-      if (newIndex != selectedAgeIndex) {
-        selectedAgeIndex = newIndex;
-        notifyListeners();
-      }
-    });
-  }
-
-  // // /////////////////
-  // // bmi calculator
-  // // /////////////////
   bool bmiCalculator = false;
   int bmistep = 0;
   bmistepsforward(int step) {
     bmistep = step;
     notifyListeners();
   }
+
   bmistepsack() {
     bmistep = bmistep - 1;
     notifyListeners();
@@ -86,18 +49,112 @@ class Statemaneger extends ChangeNotifier {
     notifyListeners();
   }
 
-  // // /////////////////
-  // // height selector
-  // /////////////////
-   final FixedExtentScrollController heightScrollController =
+  // -------------------- AGE SELECTOR --------------------
+
+  final List<String> ageList = List.generate(
+    83,
+    (index) => (index + 18).toString(),
+  );
+  int selectedAgeIndex = 0;
+  String? selectedAgeValue;
+  final PageController agePageController = PageController(
+    viewportFraction: 0.25,
+  );
+
+  void setSelectedAgeIndex(int index) {
+    selectedAgeIndex = index;
+    notifyListeners();
+  }
+
+  void saveSelectedAgeValue() {
+    selectedAgeValue = ageList[selectedAgeIndex];
+    print('Selected Age: $selectedAgeValue');
+    notifyListeners();
+  }
+
+  void restoreAgeSelection() {
+    agePageController.jumpToPage(selectedAgeIndex);
+  }
+
+  // -------------------- HEIGHT SELECTOR --------------------
+
+  final FixedExtentScrollController heightScrollController =
       FixedExtentScrollController(initialItem: 5);
 
   int selectedHeightIndex = 5;
+  String? selectedHeightValue;
 
   final List<String> heightList = List.generate(61, (i) => '${140 + i} cm');
 
   void setSelectedHeightIndex(int index) {
     selectedHeightIndex = index;
+    notifyListeners();
+  }
+
+  void saveSelectedHeightValue() {
+    selectedHeightValue = heightList[selectedHeightIndex];
+    print('Selected Height: $selectedHeightValue');
+    notifyListeners();
+  }
+
+  void restoreHeightSelection() {
+    heightScrollController.jumpToItem(selectedHeightIndex);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
+  }
+
+  // -------------------- WEIGHT SELECTOR --------------------
+  final List<String> weightList = List.generate(
+    100,
+    (index) => '${30 + index} Kg',
+  );
+  final PageController weightPageController = PageController(
+    viewportFraction: 0.35,
+  );
+
+  int selectedWeightIndex = 0;
+  String? selectedWeightValue;
+
+  void setSelectedWeightIndex(int index) {
+    selectedWeightIndex = index;
+    notifyListeners();
+  }
+
+  void saveSelectedWeightValue() {
+    selectedWeightValue = weightList[selectedWeightIndex];
+    print('Selected Weight: $selectedWeightValue');
+    notifyListeners();
+  }
+
+  void restoreWeightSelection() {
+    weightPageController.jumpToPage(selectedWeightIndex);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
+  }
+
+  void disposeControllers() {
+    agePageController.dispose();
+    heightScrollController.dispose();
+    weightPageController.dispose();
+  }
+
+  // -------------------- login popup animate --------------------
+  bool showlogin = false;
+  double bottompos = 400;
+  showloginpopup(bool val) {
+    showlogin == val;
+    notifyListeners();
+    loginposition();
+  }
+
+  loginposition() {
+    if (showlogin) {
+      bottompos = 0;
+    } else {
+      bottompos = 400;
+    }
     notifyListeners();
   }
 }

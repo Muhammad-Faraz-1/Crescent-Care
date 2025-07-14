@@ -1,0 +1,261 @@
+Widget _buildAuthSection() {
+    final theme = Theme.of(context).colorScheme;
+    return Form(
+      key: _formKey,
+      child: Stack(
+        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+        children: [
+          
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 10.h),
+                
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextWidget(
+                      size: medium,
+                      fontWeight: mediumWeight,
+                      lineheight: linesmall,
+                      color: theme.secondary,
+                      val: 'Email',
+                    ),
+                    SizedBox(height: 5.h),
+                    TextFormField(
+                      controller: emailController,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: body,
+                        fontWeight: regular,
+                        height: linesmall,
+                        color: theme.onSecondary,
+                      ),
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty)
+                      //     return 'Email is required';
+                      //   if (!value.contains('@')) return 'Enter a valid email';
+                      //   return null;
+                      // },
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 10,
+                        ),
+                        hintStyle: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: body,
+                          fontWeight: regular,
+                          height: linesmall,
+                          color: theme.onSecondary,
+                        ),
+                        hintText: 'Email',
+                        filled: true,
+                        fillColor: Color(0xfffafafa),
+                        focusColor: Color(0xfff0f0f0),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xfff0f0f0),
+                            width: 1,
+                          ), // Default state
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xfff0f0f0),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Color(0xfff0f0f0),
+                          ), // On focus
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Color(0xfff0f0f0),
+                          ), // Fallback
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15.h),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextWidget(
+                      size: medium,
+                      fontWeight: mediumWeight,
+                      lineheight: linesmall,
+                      color: theme.secondary,
+                      val: 'Password',
+                    ),
+                    SizedBox(height: 5.h),
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: hidePassword,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: body,
+                        fontWeight: regular,
+                        height: linesmall,
+                        color: theme.onSecondary,
+                      ),
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty)
+                      //     return 'Password is required';
+                      //   if (value.length < 6) return 'Minimum 6 characters';
+                      //   return null;
+                      // },
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: body,
+                          fontWeight: regular,
+                          height: linesmall,
+                          color: theme.onSecondary,
+                        ),
+                        filled: true,
+                        fillColor: Color(0xfffafafa),
+                        focusColor: Color(0xfff0f0f0),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xfff0f0f0),
+                            width: 1,
+                          ), // Default state
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xfff0f0f0),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Color(0xfff0f0f0),
+                          ), // On focus
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Color(0xfff0f0f0),
+                          ), // Fallback
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            hidePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            size: 20,
+                            color: theme.secondary,
+                          ),
+                          onPressed:
+                              () =>
+                                  setState(() => hidePassword = !hidePassword),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                if (isSignup) ...[
+                  SizedBox(height: 15.h),
+                  TextFormField(
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: body,
+                      fontWeight: regular,
+                      height: linesmall,
+                      color: theme.onSecondary,
+                    ),
+                    
+                    controller: confirmPasswordController,
+                    obscureText: hideConfirmPassword,
+                    // validator: (value) {
+                    //   if (value == null || value.isEmpty)
+                    //     return 'Confirm your password';
+                    //   if (value != passwordController.text)
+                    //     return 'Passwords do not match';
+                    //   return null;
+                    // },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                      hintText: 'Confirm Password',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: body,
+                        fontWeight: regular,
+                        height: linesmall,
+                        color: theme.onSecondary,
+                      ),
+                      filled: true,
+                      fillColor: Color(0xfffafafa),
+                      focusColor: Color(0xfff0f0f0),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xfff0f0f0),
+                          width: 1,
+                        ), // Default state
+                        borderRadius: BorderRadius.circular(4.r),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xfff0f0f0),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(4.r),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Color(0xfff0f0f0),
+                        ), // On focus
+                        borderRadius: BorderRadius.circular(4.r),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Color(0xfff0f0f0),
+                        ), // Fallback
+                        borderRadius: BorderRadius.circular(4.r),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          hideConfirmPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          size: 20,
+                          color: theme.secondary,
+                        ),
+                        onPressed:
+                            () => setState(
+                              () => hideConfirmPassword = !hideConfirmPassword,
+                            ),
+                      ),
+                    ),
+                  ),
+                ],
+                
+                
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }

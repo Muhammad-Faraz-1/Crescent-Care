@@ -64,7 +64,10 @@ class height_selection_section extends StatelessWidget {
             SizedBox(height: 20.h),
             Center(
               child: GestureDetector(
-                onTap: () => provider.bmistepsforward(2),
+                onTap: () {
+                  provider.saveSelectedHeightValue();
+                  provider.bmistepsforward(2);
+                },
                 child: Container(
                   height: 50.h,
                   width: 50.w,

@@ -3,6 +3,7 @@ import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/navbar.dart';
 import 'package:crescent_care/utils/theme.dart';
 import 'package:crescent_care/views/dashboard/dashboardpage.dart';
+import 'package:crescent_care/views/splash_page/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => Statemaneger()..initAgeSelector(),
+          create: (_) => Statemaneger(),
         ),
         ChangeNotifierProvider(create: (context) => apihandler()),
       ],
@@ -36,15 +37,16 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Crescent Care',
           theme: ThemeDataStyle.light,
-          home: const body(),
+          // home: const body(),
+          home: SplashScreen(),
         );
       },
     );
   }
 }
 
-class body extends StatelessWidget {
-  const body({super.key});
+class bodyapp extends StatelessWidget {
+  const bodyapp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,48 +1,20 @@
+import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
-class WeightSelector extends StatefulWidget {
+class WeightSelector extends StatelessWidget {
   const WeightSelector({super.key});
 
   @override
-  State<WeightSelector> createState() => _WeightSelectorState();
-}
-
-class _WeightSelectorState extends State<WeightSelector> {
-  final PageController _pageController = PageController(viewportFraction: 0.35);
-  int selectedIndex = 0;
-
-  final List<String> weightList = List.generate(100, (index) => '${30 + index} Kg');
-
-  @override
-  void initState() {
-    super.initState();
-    selectedIndex = (weightList.length / 2).floor();
-
-    _pageController.addListener(() {
-      final index = _pageController.page?.round() ?? 0;
-      if (index != selectedIndex) {
-        setState(() {
-          selectedIndex = index;
-        });
-      }
-    });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _pageController.jumpToPage(selectedIndex);
-    });
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<Statemaneger>(context);
     final theme = Theme.of(context).colorScheme;
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   provider.restoreWeightSelection();
+    // });
 
     return SizedBox(
       child: Column(
@@ -56,10 +28,13 @@ class _WeightSelectorState extends State<WeightSelector> {
                 height: 90.h,
                 width: double.infinity,
                 child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: weightList.length,
+                  controller: provider.weightPageController,
+                  itemCount: provider.weightList.length,
+                  onPageChanged: (index) {
+                    provider.setSelectedWeightIndex(index);
+                  },
                   itemBuilder: (context, index) {
-                    final isSelected = index == selectedIndex;
+                    final isSelected = index == provider.selectedWeightIndex;
                     return Center(
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
@@ -67,28 +42,32 @@ class _WeightSelectorState extends State<WeightSelector> {
                         height: isSelected ? 60.h : 50.h,
                         margin: EdgeInsets.symmetric(horizontal: 4.w),
                         decoration: BoxDecoration(
-                          color: isSelected ? theme.tertiaryContainer : theme.tertiary,
+                          color:
+                              isSelected
+                                  ? theme.tertiaryContainer
+                                  : theme.tertiary,
                           borderRadius: BorderRadius.circular(12.r),
-                          border: isSelected
-                              ? Border.all(color: theme.primary, width: 2)
-                              : null,
-                          boxShadow: isSelected
-                              ? [
-                                  BoxShadow(
-                                    color: theme.shadow.withOpacity(0.1),
-                                    blurRadius: 6,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ]
-                              : [],
+                          border:
+                              isSelected
+                                  ? Border.all(color: theme.primary, width: 2)
+                                  : null,
+                          boxShadow:
+                              isSelected
+                                  ? [
+                                    BoxShadow(
+                                      color: theme.shadow.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ]
+                                  : [],
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          weightList[index],
+                          provider.weightList[index],
                           style: TextStyle(
                             fontSize: 14.sp,
-                            fontWeight:
-                                isSelected ? semiBold : regular,
+                            fontWeight: isSelected ? semiBold : regular,
                             color: isSelected ? theme.primary : theme.secondary,
                           ),
                         ),
@@ -97,7 +76,7 @@ class _WeightSelectorState extends State<WeightSelector> {
                   },
                 ),
               ),
-      
+
               // Left triangle
               Positioned(
                 left: MediaQuery.of(context).size.width / 2 - 95.w,
@@ -108,7 +87,7 @@ class _WeightSelectorState extends State<WeightSelector> {
                   size: 30,
                 ),
               ),
-      
+
               // Right triangle
               Positioned(
                 left: MediaQuery.of(context).size.width / 2 - 95.w,
@@ -121,7 +100,7 @@ class _WeightSelectorState extends State<WeightSelector> {
               ),
             ],
           ),
-      
+
           // Ruler-like lines
           Padding(
             padding: EdgeInsets.only(top: 8.h),
@@ -137,7 +116,10 @@ class _WeightSelectorState extends State<WeightSelector> {
                     height: isTall ? 20.h : 10.h,
                     margin: EdgeInsets.symmetric(horizontal: 1.w),
                     decoration: BoxDecoration(
-                      color: isTall ? theme.shadow.withOpacity(0.3) : theme.secondary.withOpacity(0.2),
+                      color:
+                          isTall
+                              ? theme.shadow.withOpacity(0.3)
+                              : theme.secondary.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(1.r),
                     ),
                   );

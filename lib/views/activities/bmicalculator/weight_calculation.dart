@@ -1,6 +1,5 @@
 import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/constants.dart';
-import 'package:crescent_care/views/activities/bmicalculator/heightunit.dart';
 import 'package:crescent_care/views/activities/bmicalculator/weightselector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,8 +26,8 @@ class Weight_calculation extends StatelessWidget {
               color: theme.secondary,
               val: 'Select Your weight',
             ),
-            SizedBox(height: 10.h),
-            Center(child: Heightunit()),
+            // SizedBox(height: 10.h),
+            // Center(child: Heightunit()),
             SizedBox(height: 10.h),
             TextWidget(
               size: body,
@@ -48,7 +47,11 @@ class Weight_calculation extends StatelessWidget {
             SizedBox(height: 20.h),
             Center(
               child: GestureDetector(
-                onTap: () => provider.bmistepsforward(3),
+                onTap:
+                    () => {
+                      provider.bmistepsforward(3),
+                      provider.saveSelectedWeightValue(),
+                    },
                 child: Container(
                   height: 50.h,
                   width: 50.w,

@@ -1,8 +1,19 @@
 import 'dart:math';
+import 'package:crescent_care/controllers/statemanager.dart';
+import 'package:crescent_care/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+class KeyValue {
+  final String key;
+  final dynamic value;
+
+  KeyValue({required this.key, required this.value});
+}
 
 class BMIResultPage extends StatefulWidget {
-  final List<String?> valuesToShow;
+  final List<KeyValue?> valuesToShow;
   final double? finalBMI;
   final String? statusLabel;
   final double? perfectWeight;
@@ -122,6 +133,7 @@ class _BMIResultPageState extends State<BMIResultPage>
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<Statemaneger>(context);
     final theme = Theme.of(context).colorScheme;
     return Expanded(
       child: Center(
@@ -151,22 +163,43 @@ class _BMIResultPageState extends State<BMIResultPage>
                             begin: const Offset(0, 1),
                             end: Offset.zero,
                           ).animate(_wheelController),
-                          child: Text(
-                            widget.valuesToShow[_currentIndex]!,
-                            style: const TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.valuesToShow[_currentIndex]!.key
+                                    .toString(),
+                                style: TextStyle(
+                                  fontSize: body,
+                                  fontWeight: regular,
+                                  height: lineMedium,
+                                  color: theme.onSecondary,
+                                ),
+                              ),
+                              Text(
+                                widget.valuesToShow[_currentIndex]!.value
+                                    .toString(),
+                                style: TextStyle(
+                                  fontSize: large,
+                                  fontWeight: mediumWeight,
+                                  height: lineMedium,
+                                  color: theme.secondary,
+                                ),
+                              ),
+                            ],
                           ),
                         )
                         : FadeTransition(
                           opacity: _bmiRevealController,
                           child: Text(
                             widget.finalBMI!.toStringAsFixed(2),
-                            style: const TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black54,
+                            style: TextStyle(
+                              fontSize: extra_large,
+                              fontWeight: semiBold,
+                              color:
+                                  widget.finalBMI! > 20.0
+                                      ? theme.tertiaryContainer
+                                      : theme.secondary,
                             ),
                           ),
                         ),
@@ -174,7 +207,7 @@ class _BMIResultPageState extends State<BMIResultPage>
                 ),
               ),
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 30.h),
             SlideTransition(
               position: Tween<Offset>(
                 begin: const Offset(0, 1),
@@ -184,7 +217,7 @@ class _BMIResultPageState extends State<BMIResultPage>
                 children: [
                   Text(
                     widget.statusLabel!,
-                    style:  TextStyle(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: theme.primary,
@@ -236,7 +269,11 @@ class _BMIResultPageState extends State<BMIResultPage>
                   ),
                   const SizedBox(height: 24),
                   ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed:
+                        () => {
+                          Navigator.pop(context),
+                          provider.bmistepsforward(0),
+                        },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: theme.primary,
                       shape: RoundedRectangleBorder(
@@ -247,7 +284,10 @@ class _BMIResultPageState extends State<BMIResultPage>
                         vertical: 12,
                       ),
                     ),
-                    child:  Text("Go Back",style: TextStyle(color: theme.tertiaryContainer),),
+                    child: Text(
+                      "Go Back",
+                      style: TextStyle(color: theme.tertiaryContainer),
+                    ),
                   ),
                 ],
               ),

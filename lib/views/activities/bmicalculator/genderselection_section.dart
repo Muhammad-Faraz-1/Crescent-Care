@@ -48,27 +48,29 @@ class ageGender_section extends StatelessWidget {
             SizedBox(height: 20.h),
             Center(
               child: GestureDetector(
-                  onTap: () => provider.bmistepsforward(1),
-                  child: Container(
-                    height: 50.h,
-                    width: 50.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: theme.tertiaryContainer,
-                      border: Border.all(
-                        color: theme.primary,
-                        width: 2,
+                onTap: () {
+                  provider.saveSelectedAgeValue();
+                  provider.bmistepsforward(1);
+                },
+                child: Container(
+                  height: 50.h,
+                  width: 50.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: theme.tertiaryContainer,
+                    border: Border.all(color: theme.primary, width: 2),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/img/arrow-left.svg',
+                      colorFilter: ColorFilter.mode(
+                        theme.primary,
+                        BlendMode.srcIn,
                       ),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset('assets/img/arrow-left.svg',
-                          colorFilter: ColorFilter.mode(
-                            theme.primary,
-                            BlendMode.srcIn,
-                          )),
                     ),
                   ),
                 ),
+              ),
             ),
           ],
         ),
