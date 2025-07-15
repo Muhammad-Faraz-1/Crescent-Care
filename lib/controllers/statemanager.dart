@@ -157,4 +157,11 @@ class Statemaneger extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  // -------------------- Member's login tab bar --------------------
+  int selected = 1;
+  selectedtab(int val) {
+    selected = val;
+    notifyListeners();
+  }
 }

@@ -3,6 +3,7 @@ import 'package:crescent_care/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum FormStage { login, signupStep1, signupStep2 }
 
@@ -12,6 +13,18 @@ class LoginSignupPopup extends StatefulWidget {
 }
 
 class _LoginSignupPopupState extends State<LoginSignupPopup> {
+  Future<void> openWebsite() async {
+    final Uri url = Uri.parse('https://zellesolutions.com/');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.externalApplication, // opens in browser
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   FormStage _currentStage = FormStage.login;
 
   void goToStage(FormStage stage) {
@@ -57,14 +70,19 @@ class _LoginSignupPopupState extends State<LoginSignupPopup> {
           Positioned(
             left: 10,
             top: 10,
-            child: SizedBox(
-              height: 30.h,
-              width: 30.w,
-              child: SvgPicture.asset('assets/img/arrow-back.svg'),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: SizedBox(
+                height: 30.h,
+                width: 30.w,
+                child: SvgPicture.asset('assets/img/arrow-back.svg'),
+              ),
             ),
           ),
           Positioned(
-            top: -70.h,
+            top: -50,
             child: Container(
               padding: EdgeInsets.all(10.r),
               decoration: BoxDecoration(
@@ -86,15 +104,7 @@ class _LoginSignupPopupState extends State<LoginSignupPopup> {
                 ),
               ),
             ),
-          ),
-          // Positioned(
-          //   child: CircleAvatar(
-          //     radius: 30,
-          //     backgroundColor: theme.secondaryContainer,
-          //     child: Icon(Icons.health_and_safety, size: 30),
-          //   ),
-          // ),
-          // SizedBox(width: 50), // Spacer
+          ), // Spacer
         ],
       ),
     );
@@ -592,337 +602,421 @@ class _LoginSignupPopupState extends State<LoginSignupPopup> {
             Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: body,
-                      fontWeight: regular,
-                      height: linesmall,
-                      color: theme.onSecondary,
-                    ),
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty)
-                    //     return 'Email is required';
-                    //   if (!value.contains('@')) return 'Enter a valid email';
-                    //   return null;
-                    // },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextWidget(
+                        size: medium,
+                        fontWeight: mediumWeight,
+                        lineheight: linesmall,
+                        color: theme.secondary,
+                        val: 'First Name',
                       ),
-                      hintText: "First Name",
-                      filled: true,
-                      fillColor: Color(0xfffafafa),
-                      focusColor: Color(0xfff0f0f0),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff0f0f0),
-                          width: 1,
-                        ), // Default state
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff0f0f0),
-                          width: 1,
+                      SizedBox(height: 5.h),
+                      TextField(
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: body,
+                          fontWeight: regular,
+                          height: linesmall,
+                          color: theme.onSecondary,
                         ),
-                        borderRadius: BorderRadius.circular(4.r),
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty)
+                        //     return 'Email is required';
+                        //   if (!value.contains('@')) return 'Enter a valid email';
+                        //   return null;
+                        // },
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          hintText: "First Name",
+                          filled: true,
+                          fillColor: Color(0xfffafafa),
+                          focusColor: Color(0xfff0f0f0),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xfff0f0f0),
+                              width: 1,
+                            ), // Default state
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xfff0f0f0),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xfff0f0f0),
+                            ), // On focus
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xfff0f0f0),
+                            ), // Fallback
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                        ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0xfff0f0f0),
-                        ), // On focus
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0xfff0f0f0),
-                        ), // Fallback
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(width: 10),
                 Expanded(
-                  child: TextField(
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: body,
-                      fontWeight: regular,
-                      height: linesmall,
-                      color: theme.onSecondary,
-                    ),
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty)
-                    //     return 'Email is required';
-                    //   if (!value.contains('@')) return 'Enter a valid email';
-                    //   return null;
-                    // },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextWidget(
+                        size: medium,
+                        fontWeight: mediumWeight,
+                        lineheight: linesmall,
+                        color: theme.secondary,
+                        val: 'Last Name',
                       ),
-                      hintText: "Last Name",
-                      filled: true,
-                      fillColor: Color(0xfffafafa),
-                      focusColor: Color(0xfff0f0f0),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff0f0f0),
-                          width: 1,
-                        ), // Default state
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff0f0f0),
-                          width: 1,
+                      SizedBox(height: 5.h),
+                      TextField(
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: body,
+                          fontWeight: regular,
+                          height: linesmall,
+                          color: theme.onSecondary,
                         ),
-                        borderRadius: BorderRadius.circular(4.r),
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty)
+                        //     return 'Email is required';
+                        //   if (!value.contains('@')) return 'Enter a valid email';
+                        //   return null;
+                        // },
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          hintText: "Last Name",
+                          filled: true,
+                          fillColor: Color(0xfffafafa),
+                          focusColor: Color(0xfff0f0f0),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xfff0f0f0),
+                              width: 1,
+                            ), // Default state
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xfff0f0f0),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xfff0f0f0),
+                            ), // On focus
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xfff0f0f0),
+                            ), // Fallback
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                        ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0xfff0f0f0),
-                        ), // On focus
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0xfff0f0f0),
-                        ), // Fallback
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ],
             ),
             SizedBox(height: 10.h),
-            TextField(
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: body,
-                fontWeight: regular,
-                height: linesmall,
-                color: theme.onSecondary,
-              ),
-              // validator: (value) {
-              //   if (value == null || value.isEmpty)
-              //     return 'Email is required';
-              //   if (!value.contains('@')) return 'Enter a valid email';
-              //   return null;
-              // },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextWidget(
+                  size: medium,
+                  fontWeight: mediumWeight,
+                  lineheight: linesmall,
+                  color: theme.secondary,
+                  val: 'User Name',
                 ),
-                hintText: "User Name",
-                filled: true,
-                fillColor: Color(0xfffafafa),
-                focusColor: Color(0xfff0f0f0),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color(0xfff0f0f0),
-                    width: 1,
-                  ), // Default state
-                  borderRadius: BorderRadius.circular(4.r),
+                SizedBox(height: 5.h),
+                TextField(
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: body,
+                    fontWeight: regular,
+                    height: linesmall,
+                    color: theme.onSecondary,
+                  ),
+                  // validator: (value) {
+                  //   if (value == null || value.isEmpty)
+                  //     return 'Email is required';
+                  //   if (!value.contains('@')) return 'Enter a valid email';
+                  //   return null;
+                  // },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 0,
+                    ),
+                    hintText: "User Name",
+                    filled: true,
+                    fillColor: Color(0xfffafafa),
+                    focusColor: Color(0xfff0f0f0),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xfff0f0f0),
+                        width: 1,
+                      ), // Default state
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xfff0f0f0),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: Color(0xfff0f0f0),
+                      ), // On focus
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: Color(0xfff0f0f0),
+                      ), // Fallback
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                  ),
                 ),
-                disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xfff0f0f0), width: 1),
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: Color(0xfff0f0f0),
-                  ), // On focus
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: Color(0xfff0f0f0),
-                  ), // Fallback
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-              ),
+              ],
             ),
             SizedBox(height: 10.h),
             Row(
               children: [
                 Expanded(
                   flex: 2,
-                  child: TextField(
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: body,
-                      fontWeight: regular,
-                      height: linesmall,
-                      color: theme.onSecondary,
-                    ),
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty)
-                    //     return 'Email is required';
-                    //   if (!value.contains('@')) return 'Enter a valid email';
-                    //   return null;
-                    // },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextWidget(
+                        size: medium,
+                        fontWeight: mediumWeight,
+                        lineheight: linesmall,
+                        color: theme.secondary,
+                        val: 'Gender',
                       ),
-                      hintText: "Gender",
-                      filled: true,
-                      fillColor: Color(0xfffafafa),
-                      focusColor: Color(0xfff0f0f0),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff0f0f0),
-                          width: 1,
-                        ), // Default state
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff0f0f0),
-                          width: 1,
+                      SizedBox(height: 5.h),
+                      TextField(
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: body,
+                          fontWeight: regular,
+                          height: linesmall,
+                          color: theme.onSecondary,
                         ),
-                        borderRadius: BorderRadius.circular(4.r),
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty)
+                        //     return 'Email is required';
+                        //   if (!value.contains('@')) return 'Enter a valid email';
+                        //   return null;
+                        // },
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          hintText: "Gender",
+                          filled: true,
+                          fillColor: Color(0xfffafafa),
+                          focusColor: Color(0xfff0f0f0),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xfff0f0f0),
+                              width: 1,
+                            ), // Default state
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xfff0f0f0),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xfff0f0f0),
+                            ), // On focus
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xfff0f0f0),
+                            ), // Fallback
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                        ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0xfff0f0f0),
-                        ), // On focus
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0xfff0f0f0),
-                        ), // Fallback
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(width: 10.h),
                 Expanded(
                   flex: 3,
-                  child: TextField(
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: body,
-                      fontWeight: regular,
-                      height: linesmall,
-                      color: theme.onSecondary,
-                    ),
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty)
-                    //     return 'Email is required';
-                    //   if (!value.contains('@')) return 'Enter a valid email';
-                    //   return null;
-                    // },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextWidget(
+                        size: medium,
+                        fontWeight: mediumWeight,
+                        lineheight: linesmall,
+                        color: theme.secondary,
+                        val: 'Contact',
                       ),
-                      hintText: "Contact",
-                      filled: true,
-                      fillColor: Color(0xfffafafa),
-                      focusColor: Color(0xfff0f0f0),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff0f0f0),
-                          width: 1,
-                        ), // Default state
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff0f0f0),
-                          width: 1,
+                      SizedBox(height: 5.h),
+                      TextField(
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: body,
+                          fontWeight: regular,
+                          height: linesmall,
+                          color: theme.onSecondary,
                         ),
-                        borderRadius: BorderRadius.circular(4.r),
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty)
+                        //     return 'Email is required';
+                        //   if (!value.contains('@')) return 'Enter a valid email';
+                        //   return null;
+                        // },
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          hintText: "Contact",
+                          filled: true,
+                          fillColor: Color(0xfffafafa),
+                          focusColor: Color(0xfff0f0f0),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xfff0f0f0),
+                              width: 1,
+                            ), // Default state
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xfff0f0f0),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xfff0f0f0),
+                            ), // On focus
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: Color(0xfff0f0f0),
+                            ), // Fallback
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                        ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0xfff0f0f0),
-                        ), // On focus
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0xfff0f0f0),
-                        ), // Fallback
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ],
             ),
             SizedBox(height: 10.h),
-            TextField(
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: body,
-                fontWeight: regular,
-                height: linesmall,
-                color: theme.onSecondary,
-              ),
-              // validator: (value) {
-              //   if (value == null || value.isEmpty)
-              //     return 'Email is required';
-              //   if (!value.contains('@')) return 'Enter a valid email';
-              //   return null;
-              // },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextWidget(
+                  size: medium,
+                  fontWeight: mediumWeight,
+                  lineheight: linesmall,
+                  color: theme.secondary,
+                  val: 'Date of Birth',
                 ),
-                hintText: "Date of Birth",
-                filled: true,
-                fillColor: Color(0xfffafafa),
-                focusColor: Color(0xfff0f0f0),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color(0xfff0f0f0),
-                    width: 1,
-                  ), // Default state
-                  borderRadius: BorderRadius.circular(4.r),
+                SizedBox(height: 5.h),
+                TextField(
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: body,
+                    fontWeight: regular,
+                    height: linesmall,
+                    color: theme.onSecondary,
+                  ),
+                  // validator: (value) {
+                  //   if (value == null || value.isEmpty)
+                  //     return 'Email is required';
+                  //   if (!value.contains('@')) return 'Enter a valid email';
+                  //   return null;
+                  // },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 0,
+                    ),
+                    hintText: "Date of Birth",
+                    filled: true,
+                    fillColor: Color(0xfffafafa),
+                    focusColor: Color(0xfff0f0f0),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xfff0f0f0),
+                        width: 1,
+                      ), // Default state
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xfff0f0f0),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: Color(0xfff0f0f0),
+                      ), // On focus
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: Color(0xfff0f0f0),
+                      ), // Fallback
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                  ),
                 ),
-                disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xfff0f0f0), width: 1),
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: Color(0xfff0f0f0),
-                  ), // On focus
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: Color(0xfff0f0f0),
-                  ), // Fallback
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-              ),
+              ],
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -972,9 +1066,14 @@ class _LoginSignupPopupState extends State<LoginSignupPopup> {
               // Icon(Icons.chat_bubble, color: Colors.blue),
               SizedBox(width: 10),
               Text("Powered by ", style: TextStyle(fontSize: 14)),
-              Text(
-                "Zelle Solutions Pvt. Ltd.",
-                style: TextStyle(color: Colors.blue, fontSize: 14),
+              GestureDetector(
+                onTap: () {
+                  openWebsite();
+                },
+                child: Text(
+                  "Zelle Solutions Pvt. Ltd.",
+                  style: TextStyle(color: Colors.blue, fontSize: 14),
+                ),
               ),
             ],
           ),

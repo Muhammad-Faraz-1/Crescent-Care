@@ -12,7 +12,7 @@ class Navbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Container(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(vertical: 15.h),
       decoration: BoxDecoration(
         color: theme.primaryContainer,

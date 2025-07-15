@@ -1,5 +1,6 @@
 import 'package:crescent_care/utils/constants.dart';
 import 'package:crescent_care/views/activities/activities.dart';
+import 'package:crescent_care/views/memberlogin/members_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,34 +16,46 @@ class SectionsGrid extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 130.w,
-              height: 210.h,
-              padding: EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                gradient: LinearGradient(
-                  colors: [theme.onTertiary, theme.primary],
-                ),
-              ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const MembersDashboard(),
+                  ),
+                );
+              },
               child: Container(
+                width: 130.w,
+                height: 210.h,
+                padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.r),
-                  color: theme.tertiaryContainer,
+                  gradient: LinearGradient(
+                    colors: [theme.onTertiary, theme.primary],
+                  ),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextWidget(
-                      size: medium,
-                      fontWeight: semiBold,
-                      lineheight: linesmall,
-                      color: theme.primary,
-                      val: 'Member\'s Login',
-                    ),
-                    Image.asset('assets/img/member.png', fit: BoxFit.contain),
-                  ],
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                    color: theme.tertiaryContainer,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                    horizontal: 15.w,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(
+                        size: medium,
+                        fontWeight: semiBold,
+                        lineheight: linesmall,
+                        color: theme.primary,
+                        val: 'Member\'s Login',
+                      ),
+                      Image.asset('assets/img/member.png', fit: BoxFit.contain),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -71,7 +84,7 @@ class SectionsGrid extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.only(top: 10.h, left: 10.w),
+                          padding: EdgeInsets.only(top: 10.h, left: 10.w),
                           child: TextWidget(
                             size: medium,
                             fontWeight: semiBold,
@@ -112,7 +125,7 @@ class SectionsGrid extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.only(top: 10.h, left: 10.w),
+                          padding: EdgeInsets.only(top: 10.h, left: 10.w),
                           child: TextWidget(
                             size: medium,
                             fontWeight: semiBold,
