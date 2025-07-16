@@ -1,6 +1,6 @@
 import 'package:crescent_care/utils/constants.dart';
 import 'package:crescent_care/views/activities/activities.dart';
-import 'package:crescent_care/views/memberlogin/members_dashboard.dart';
+import 'package:crescent_care/views/memberlogin/memberspage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +20,7 @@ class SectionsGrid extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const MembersDashboard(),
+                    builder: (BuildContext context) => Memberspage(),
                   ),
                 );
               },

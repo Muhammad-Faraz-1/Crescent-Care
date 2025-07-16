@@ -1,34 +1,37 @@
+import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/constants.dart';
 import 'package:crescent_care/utils/navbar.dart';
-import 'package:crescent_care/views/memberlogin/chart.dart';
-import 'package:crescent_care/views/memberlogin/claimcard.dart';
-import 'package:crescent_care/views/memberlogin/claims.dart';
-import 'package:crescent_care/views/memberlogin/membercards.dart';
+import 'package:crescent_care/views/memberlogin/claims/claimspage.dart';
+import 'package:crescent_care/views/memberlogin/dashboard/members_dashboard.dart';
 import 'package:crescent_care/views/memberlogin/tabbar.dart';
-import 'package:crescent_care/views/memberlogin/utilization.dart';
+import 'package:crescent_care/views/memberlogin/utilization/utilizationpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
-class MembersDashboard extends StatelessWidget {
-  const MembersDashboard({super.key});
+class Memberspage extends StatelessWidget {
+  const Memberspage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    final provider = Provider.of<Statemaneger>(context);
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          color: theme.tertiaryContainer,
-          child: Stack(
-            children: [
-              
-              Column(
+        body: Stack(
+          children: [
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.white,
+              child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10.w,
+                      vertical: 20.h,
+                    ),
                     decoration: BoxDecoration(
                       color: theme.tertiaryContainer,
                       border: Border(
@@ -46,6 +49,7 @@ class MembersDashboard extends StatelessWidget {
                                 Navigator.pop(context);
                               },
                               child: Transform.flip(
+                                flipX: true,
                                 child: SvgPicture.asset(
                                   'assets/img/arrow-right.svg',
                                   colorFilter: ColorFilter.mode(
@@ -53,7 +57,6 @@ class MembersDashboard extends StatelessWidget {
                                     BlendMode.srcIn,
                                   ),
                                 ),
-                                flipX: true,
                               ),
                             ),
                             SizedBox(width: 10.w),
@@ -71,44 +74,17 @@ class MembersDashboard extends StatelessWidget {
                     ),
                   ),
                   HorizontalTabBar(),
-                  Expanded(
-                    child: Padding(
-                      padding: REdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 10.h,
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                           Membercards(),
-                            //
-                            SizedBox(height: 20.h),
-                            Utilization(),
-                            //
-                            SizedBox(height: 20.h),
-                            Activity(),
-                            //
-                            SizedBox(height: 20.h),
-                            UtilizationCard(),
-                            //
-                            SizedBox(height: 20.h),
-                            ClaimDetailsCard(),
-                            //
-                            SizedBox(height: 20.h),
-                            RecentClaims(),
-                            SizedBox(height: 100.h,)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  SizedBox(height: 10.h),
+                  provider.selected == 1
+                      ? MembersDashboard()
+                      : provider.selected == 3
+                      ? Utilizationpage()
+                      : Claimspage(),
                 ],
               ),
-              Positioned(
-                bottom: 0,
-                child: Navbar()),
-            ],
-          ),
+            ),
+            Positioned(bottom: 0, child: Navbar()),
+          ],
         ),
       ),
     );

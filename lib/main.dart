@@ -3,6 +3,7 @@ import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/navbar.dart';
 import 'package:crescent_care/utils/theme.dart';
 import 'package:crescent_care/views/dashboard/dashboardpage.dart';
+import 'package:crescent_care/views/memberlogin/memberspage.dart';
 import 'package:crescent_care/views/splash_page/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
           title: 'Crescent Care',
           theme: ThemeDataStyle.light,
           // home: const body(),
-          home: SplashScreen(),
+          home: Memberspage(),
+          // home: SplashScreen(),
         );
       },
     );

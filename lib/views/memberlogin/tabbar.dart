@@ -12,15 +12,15 @@ class HorizontalTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 360.w,
+
       // height: 38.h,
-      
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           child: Row(
             children: [
-              TabItem(label: 'Overview', isSelected: true, id: 1),
+              TabItem(label: 'Overview', id: 1),
               TabItem(label: 'Profile', id: 2),
               TabItem(label: 'Utilization', id: 3),
               TabItem(label: 'Claims', id: 4),
@@ -35,15 +35,9 @@ class HorizontalTabBar extends StatelessWidget {
 
 class TabItem extends StatelessWidget {
   final String label;
-  final bool isSelected;
   int? id;
 
-  TabItem({
-    super.key,
-    required this.label,
-    this.isSelected = false,
-    required this.id,
-  });
+  TabItem({super.key, required this.label, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +50,10 @@ class TabItem extends StatelessWidget {
       child: Container(
         width: 80.w,
         // height: 38.h,
-        margin: EdgeInsets.symmetric(horizontal: 5,vertical: 0), // optional spacing
+        margin: EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 0,
+        ), // optional spacing
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -65,7 +62,7 @@ class TabItem extends StatelessWidget {
               provider.selected == id
                   ? Border(
                     bottom: BorderSide(
-                      color: theme.secondaryContainer, // primary color
+                      color: theme.primary, // primary color
                       width: 1,
                     ),
                   )
@@ -76,10 +73,12 @@ class TabItem extends StatelessWidget {
             label,
             style: TextStyle(
               fontFamily: 'Poppins',
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-              fontSize: 12,
+              fontWeight:
+                  provider.selected == id ? FontWeight.w600 : FontWeight.w500,
+              fontSize: 12.sp,
               height: 1.5, // line-height 18px on 12px font
-              color: provider.selected == id ? theme.secondaryContainer : theme.onSecondary,
+              color:
+                  provider.selected == id ? theme.primary : theme.onSecondary,
             ),
             textAlign: TextAlign.center,
           ),

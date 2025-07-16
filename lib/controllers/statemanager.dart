@@ -164,4 +164,40 @@ class Statemaneger extends ChangeNotifier {
     selected = val;
     notifyListeners();
   }
+
+  // -------------------- policy popup --------------------
+  int currentpolicy = 1;
+  selectedpolicy(int val) {
+    currentpolicy = val;
+    notifyListeners();
+  }
+
+  // -------------------- claims tabs --------------------
+  int selectedclaimtab = 1;
+  claimtab(int val) {
+    selectedclaimtab = val;
+    notifyListeners();
+  }
+
+  // -------------------- Claims files --------------------
+  bool addingfile=false;
+  adding(bool val) {
+    addingfile = val;
+    notifyListeners();
+  }
+
+  List<String> uploadedFiles = [
+    'invoice-darulsehat.pdf',
+    'invoice-essalabs.pdf',
+  ];
+
+  addFile() {
+    uploadedFiles.add('invoice-${uploadedFiles.length + 1}.pdf');
+    notifyListeners();
+  }
+
+  removeFile(int index) {
+    uploadedFiles.removeAt(index);
+    notifyListeners();
+  }
 }

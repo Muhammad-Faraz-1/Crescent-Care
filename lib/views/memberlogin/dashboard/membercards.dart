@@ -62,7 +62,7 @@ class PolicyCard extends StatelessWidget {
                       children: [
                         Text(
                           'Policy No    2025/04/T106HHHTDP00099',
-                          style: TextStyle(fontSize: small),
+                          style: TextStyle(fontSize: small.sp),
                         ),
                         SizedBox(
                           height: 50.h,
@@ -74,8 +74,7 @@ class PolicyCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
-
+                     SizedBox(height: 10.h),
                     // Name and company
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,7 +101,7 @@ class PolicyCard extends StatelessWidget {
                               children: [
                                 Text(
                                   'Effective Date',
-                                  style: TextStyle(fontSize: small),
+                                  style: TextStyle(fontSize: small.sp),
                                 ),
                                 Text(
                                   '10/05/2025',

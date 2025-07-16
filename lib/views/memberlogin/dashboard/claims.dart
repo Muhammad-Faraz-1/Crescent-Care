@@ -30,14 +30,14 @@ class ClaimDetailsCard extends StatelessWidget {
                 style: TextStyle(
                   color: theme.secondary,
                   fontFamily: 'Poppins',
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 '19',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w500,
                   color: theme.secondary,
                   fontFamily: 'Poppins',
@@ -112,7 +112,7 @@ class _ClaimBox extends StatelessWidget {
             title,
             style: TextStyle(
               color: theme.tertiaryContainer,
-              fontSize: 12,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w600,
               fontFamily: 'Poppins',
             ),
@@ -128,7 +128,7 @@ class _ClaimBox extends StatelessWidget {
                   Text(
                     count,
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 25.sp,
                       height: 1.5,
                       fontWeight: FontWeight.w600,
                       color: theme.tertiaryContainer,
@@ -138,7 +138,7 @@ class _ClaimBox extends StatelessWidget {
                   Text(
                     worth,
                     style: TextStyle(
-                      fontSize: 8,
+                      fontSize: 8.sp,
                       height: 1.25,
                       fontWeight: FontWeight.w500,
                       color: theme.tertiaryContainer,
@@ -189,7 +189,7 @@ class _SubmittedClaimBox extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w600,
               color: theme.tertiaryContainer,
               fontFamily: 'Poppins',
@@ -202,7 +202,7 @@ class _SubmittedClaimBox extends StatelessWidget {
               Text(
                 count,
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 25.sp,
                   height: 1.5,
                   fontWeight: FontWeight.w600,
                   color: theme.tertiaryContainer,
@@ -212,7 +212,7 @@ class _SubmittedClaimBox extends StatelessWidget {
               Text(
                 worth,
                 style: TextStyle(
-                  fontSize: 8,
+                  fontSize: 8.sp,
                   height: 1.25,
                   fontWeight: FontWeight.w500,
                   color: theme.tertiaryContainer,

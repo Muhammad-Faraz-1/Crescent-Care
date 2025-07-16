@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:crescent_care/utils/constants.dart';
-import 'package:crescent_care/views/memberlogin/donut.dart';
+import 'package:crescent_care/views/memberlogin/dashboard/donut.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -48,7 +48,7 @@ class LimitCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF535353), // dark grey
+                  color: theme.secondary, // dark grey
                   fontFamily: 'Poppins',
                 ),
               ),
@@ -58,23 +58,19 @@ class LimitCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF6962BB), // primary
+                  color: theme.primary, // primary
                   fontFamily: 'Poppins',
                 ),
               ),
             ],
           ),
           // Donut chart
-          Positioned(
-            top: 10,
-            right: 10,
-            child: DonutProgressIndicator(
-              percentage: Val!,
-              size: 60,
-              strokeWidth: 6,
-              backgroundColor: theme.onTertiary, // support
-              fillColor: theme.primary, // primary
-            ),
+          DonutProgressIndicator(
+            percentage: Val!,
+            size: 60,
+            strokeWidth: 6,
+            backgroundColor: theme.onTertiary, // support
+            fillColor: theme.primary, // primary
           ),
         ],
       ),
@@ -92,7 +88,7 @@ class Utilization extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextWidget(
-          size: medium,
+          size: medium.sp,
           fontWeight: mediumWeight,
           lineheight: linesmall,
           color: theme.secondary,
@@ -126,7 +122,7 @@ class UtilizationCard extends StatelessWidget {
     return Container(
       width: 320.w,
       // height: 107.h,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.centerLeft,
@@ -156,11 +152,11 @@ class UtilizationCard extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Poppins',
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 17.h),
+                SizedBox(height: 15.h),
                 Row(
                   children: [
                     // Limit
