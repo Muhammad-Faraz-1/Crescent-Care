@@ -180,7 +180,7 @@ class Statemaneger extends ChangeNotifier {
   }
 
   // -------------------- Claims files --------------------
-  bool addingfile=false;
+  bool addingfile = false;
   adding(bool val) {
     addingfile = val;
     notifyListeners();
@@ -198,6 +198,42 @@ class Statemaneger extends ChangeNotifier {
 
   removeFile(int index) {
     uploadedFiles.removeAt(index);
+    notifyListeners();
+  }
+
+  // -------------------- Claims popups --------------------
+  bool submitpopup = false;
+  double submitbottom = -500;
+  submittedpopupshow(bool val) {
+    submitpopup = val;
+    notifyListeners();
+    submitpostion();
+  }
+
+  submitpostion() {
+    if (submitpopup) {
+      submitbottom = 0;
+    } else {
+      submitbottom = -500;
+    }
+    notifyListeners();
+  }
+
+  bool processpopup = false;
+  double processbottom = -500;
+
+  showprocessfilters(bool val) {
+    processpopup = val;
+    notifyListeners();
+    processposition();
+  }
+
+  processposition() {
+    if (processpopup) {
+      processbottom = 0;
+    } else {
+      processbottom = -500;
+    }
     notifyListeners();
   }
 }

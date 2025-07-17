@@ -1,4 +1,5 @@
 import 'package:crescent_care/controllers/statemanager.dart';
+import 'package:crescent_care/main.dart';
 import 'package:crescent_care/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,10 +21,26 @@ class Navbar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(flex: 1, child: navbutton(id: 1, title: 'Home', icon: 'home')),
-          Expanded(flex: 1, child: navbutton(id: 2, title: 'Consultation', icon: 'consultation')),
-          Expanded(flex: 1, child: navbutton(id: 3, title: 'Chat', icon: 'chats')),
-          Expanded(flex: 1, child: navbutton(id: 4, title: 'More', icon: 'more')),
+          Expanded(
+            flex: 1,
+            child: navbutton(id: 1, title: 'Home', icon: 'home'),
+          ),
+          Expanded(
+            flex: 1,
+            child: navbutton(
+              id: 2,
+              title: 'Consultation',
+              icon: 'consultation',
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: navbutton(id: 3, title: 'Chat', icon: 'chats'),
+          ),
+          Expanded(
+            flex: 1,
+            child: navbutton(id: 4, title: 'More', icon: 'more'),
+          ),
         ],
       ),
     );
@@ -49,6 +66,13 @@ class navbutton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         provider.setnavbtn(id!);
+        provider.navbtn == 1
+            ? Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => bodyapp(),
+              ),
+            )
+            : null;
       },
       child: Column(
         children: [
@@ -60,9 +84,10 @@ class navbutton extends StatelessWidget {
                 'assets/img/${icon}.svg',
                 height: 20.h,
                 width: 20.w,
-                color: provider.navbtn == id
-                    ? theme.secondaryContainer
-                    : theme.onSecondary,
+                color:
+                    provider.navbtn == id
+                        ? theme.secondaryContainer
+                        : theme.onSecondary,
               ),
             ),
           ),
@@ -70,9 +95,10 @@ class navbutton extends StatelessWidget {
             size: small,
             fontWeight: semiBold,
             lineheight: lineMedium,
-            color: provider.navbtn == id
-                ? theme.secondaryContainer
-                : theme.onSecondary,
+            color:
+                provider.navbtn == id
+                    ? theme.secondaryContainer
+                    : theme.onSecondary,
             val: title,
           ),
         ],

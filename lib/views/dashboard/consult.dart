@@ -25,7 +25,7 @@ class Consultsection extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      color: theme.onTertiary,
+      color: theme.onTertiary.withOpacity(0.2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

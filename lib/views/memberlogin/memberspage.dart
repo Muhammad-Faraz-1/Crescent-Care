@@ -79,7 +79,7 @@ class Memberspage extends StatelessWidget {
                       ? MembersDashboard()
                       : provider.selected == 3
                       ? Utilizationpage()
-                      : Claimspage(),
+                      : Expanded(child: Claimspage()),
                 ],
               ),
             ),

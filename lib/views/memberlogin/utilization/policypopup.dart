@@ -27,14 +27,31 @@ class PolicyPopupWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Policy',
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w500,
-                color: theme.secondary,
-                fontFamily: 'Poppins',
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Policy',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
+                    color: theme.secondary,
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SizedBox(
+                    width: 25.w,
+                    child: SvgPicture.asset(
+                      'assets/img/cancel.svg',
+                      colorFilter: ColorFilter.mode(theme.secondary, BlendMode.srcIn),
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 15.h),
             _PolicyCard(
@@ -82,8 +99,8 @@ class _PolicyCard extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 60.h,
-        margin:  EdgeInsets.only(bottom: 10.h),
-        padding:  EdgeInsets.all(5),
+        margin: EdgeInsets.only(bottom: 10.h),
+        padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
           color:
               provider.currentpolicy == id
@@ -116,16 +133,19 @@ class _PolicyCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style:  TextStyle(
+                    style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Poppins',
                       color: Color(0xFF757575),
                     ),
                   ),
-                  
+
                   Align(
-                    alignment: provider.currentpolicy==id? Alignment.centerLeft:Alignment.centerRight,
+                    alignment:
+                        provider.currentpolicy == id
+                            ? Alignment.centerLeft
+                            : Alignment.centerRight,
                     child: Text(
                       subtitle,
                       style: TextStyle(
@@ -140,10 +160,13 @@ class _PolicyCard extends StatelessWidget {
               ),
             ),
             if (provider.currentpolicy == id)
-              Center(child: SizedBox(
-                height: 30,
-                width: 30,
-                child: SvgPicture.asset('assets/img/check.svg'))),
+              Center(
+                child: SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: SvgPicture.asset('assets/img/check.svg'),
+                ),
+              ),
           ],
         ),
       ),

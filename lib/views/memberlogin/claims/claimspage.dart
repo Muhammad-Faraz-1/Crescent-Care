@@ -3,6 +3,10 @@
 import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/constants.dart';
 import 'package:crescent_care/views/memberlogin/claims/addclaims.dart';
+import 'package:crescent_care/views/memberlogin/claims/processedclaims.dart';
+import 'package:crescent_care/views/memberlogin/claims/processpopup.dart';
+import 'package:crescent_care/views/memberlogin/claims/submittedclaims.dart';
+import 'package:crescent_care/views/memberlogin/claims/sumittedpop.dart';
 import 'package:crescent_care/views/memberlogin/utilization/policypopup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,56 +19,73 @@ class Claimspage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     final provider = Provider.of<Statemaneger>(context);
-    return Expanded(
-      child: Container(
-        // width: MediaQuery.of(context).size.width - 20,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                ClaimTab(id: 1, val: 'Add Claims'),
-                ClaimTab(id: 2, val: 'Submitted'),
-                ClaimTab(id: 3, val: 'Processed'),
-              ],
-            ),
-            SizedBox(height: 20.h),
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const PolicyPopupWidget(),
-                );
-              },
-              child: Row(
+    return Stack(
+      children: [
+        Container(
+          // width: MediaQuery.of(context).size.width - 20,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  TextWidget(
-                    size: body,
-                    fontWeight: semiBold,
-                    lineheight: linesmall,
-                    color: theme.primary,
-                    val: 'Policy:',
-                  ),
-                  SizedBox(width: 10.w),
-                  TextWidget(
-                    size: medium,
-                    fontWeight: mediumWeight,
-                    lineheight: linesmall,
-                    color: theme.secondary,
-                    val:
-                        provider.currentpolicy == 1
-                            ? 'Parents  Hospitalization'
-                            : provider.currentpolicy == 2
-                            ? 'Family Hospitalization '
-                            : 'Out-Patient',
-                  ),
+                  ClaimTab(id: 1, val: 'Add Claims'),
+                  ClaimTab(id: 2, val: 'Submitted'),
+                  ClaimTab(id: 3, val: 'Processed'),
                 ],
               ),
-            ),
-            Addclaims(),
-          ],
+              SizedBox(height: 20.h),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const PolicyPopupWidget(),
+                  );
+                },
+                child: Row(
+                  children: [
+                    TextWidget(
+                      size: body,
+                      fontWeight: semiBold,
+                      lineheight: linesmall,
+                      color: theme.primary,
+                      val: 'Policy:',
+                    ),
+                    SizedBox(width: 10.w),
+                    TextWidget(
+                      size: medium,
+                      fontWeight: mediumWeight,
+                      lineheight: linesmall,
+                      color: theme.secondary,
+                      val:
+                          provider.currentpolicy == 1
+                              ? 'Parents  Hospitalization'
+                              : provider.currentpolicy == 2
+                              ? 'Family Hospitalization '
+                              : 'Out-Patient',
+                    ),
+                  ],
+                ),
+              ),
+              provider.selectedclaimtab == 1
+                  ? Addclaims()
+                  : provider.selectedclaimtab == 2
+                  ? Submittedclaims()
+                  : Processedclaims(),
+            ],
+          ),
         ),
-      ),
+        AnimatedPositioned(
+          bottom: provider.submitbottom,
+          duration: Duration(seconds: 1),
+          child: Filtersubmitted(),
+        ),
+
+         AnimatedPositioned(
+          bottom: provider.processbottom,
+          duration: Duration(seconds: 1),
+          child: Processpopup(),
+        ),
+      ],
     );
   }
 }
