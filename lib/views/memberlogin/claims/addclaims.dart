@@ -19,7 +19,7 @@ class Addclaims extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              if (provider.addingfile)
+              if (provider.addingfile && provider.invoices.isNotEmpty)
                 Column(
                   children: [
                     SizedBox(height: 20.h),
@@ -29,7 +29,7 @@ class Addclaims extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () {
-                          provider.addFile();
+                          provider.showfileupload(true);
                         },
                         child: Container(
                           height: 50,
@@ -52,10 +52,13 @@ class Addclaims extends StatelessWidget {
               SizedBox(height: 10.h),
               ElevatedButton(
                 onPressed: () {
-                  provider.adding(true);
+                  provider.showfileupload(true);
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
                   backgroundColor: theme.secondaryContainer,
                   minimumSize: Size(double.infinity, 50),
                 ),
@@ -70,7 +73,7 @@ class Addclaims extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 70.h),
+              // SizedBox(height: 70.h),
             ],
           ),
         ),

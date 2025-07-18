@@ -34,7 +34,7 @@ class MembersDashboard extends StatelessWidget {
               //
               SizedBox(height: 20.h),
               RecentClaims(),
-              SizedBox(height: 100.h),
+              // SizedBox(height: 100.h),
             ],
           ),
         ),

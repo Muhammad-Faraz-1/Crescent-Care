@@ -3,10 +3,11 @@
 import 'package:crescent_care/controllers/statemanager.dart';
 import 'package:crescent_care/utils/constants.dart';
 import 'package:crescent_care/views/memberlogin/claims/addclaims.dart';
+import 'package:crescent_care/views/memberlogin/claims/fileaddingpopup.dart';
 import 'package:crescent_care/views/memberlogin/claims/processedclaims.dart';
 import 'package:crescent_care/views/memberlogin/claims/processpopup.dart';
 import 'package:crescent_care/views/memberlogin/claims/submittedclaims.dart';
-import 'package:crescent_care/views/memberlogin/claims/sumittedpop.dart';
+import 'package:crescent_care/views/memberlogin/claims/sumittedfilters.dart';
 import 'package:crescent_care/views/memberlogin/utilization/policypopup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,11 +81,13 @@ class Claimspage extends StatelessWidget {
           child: Filtersubmitted(),
         ),
 
-         AnimatedPositioned(
+        AnimatedPositioned(
           bottom: provider.processbottom,
           duration: Duration(seconds: 1),
           child: Processpopup(),
         ),
+
+        if (provider.fileuploadpopup) UploadPopup(),
       ],
     );
   }

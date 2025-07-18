@@ -10,8 +10,8 @@ class InvoiceUploadDynamic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Statemaneger>(context);
-    double fileHeight = 36; // height for each file + spacing
-    double lineHeight = provider.uploadedFiles.length * fileHeight;
+    double fileHeight = 50; // height for each file + spacing
+    double lineHeight = provider.invoices.length * fileHeight;
 
     return Stack(
       children: [
@@ -44,11 +44,11 @@ class InvoiceUploadDynamic extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 5),
                 child: Column(
                   children:
-                      provider.uploadedFiles.asMap().entries.map((entry) {
+                      provider.invoices.asMap().entries.map((entry) {
                         int index = entry.key;
                         String file = entry.value;
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
+                          padding:  EdgeInsets.only(bottom: 5),
                           child: InvoiceItem(
                             filename: file,
                             onRemove: () => provider.removeFile(index),
@@ -69,7 +69,7 @@ class InvoiceUploadDynamic extends StatelessWidget {
           top: 25,
           child: Container(
             width: 1,
-            height: lineHeight - 15,
+            height: lineHeight - 20,
             decoration: const BoxDecoration(
               border: Border(
                 left: BorderSide(color: Color(0xFF757575), width: 1),
@@ -101,7 +101,7 @@ class InvoiceItem extends StatelessWidget {
         Expanded(
           child: Container(
             // width: 280,
-            height: 31,
+            height: 45,
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Color(0xFFF0F0F0)),
@@ -113,10 +113,10 @@ class InvoiceItem extends StatelessWidget {
                 Expanded(
                   child: Text(
                     filename,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
-                      fontSize: 10,
+                      fontSize: 12.sp,
                       height: 1.5,
                       color: Color(0xFF6962BB),
                     ),
@@ -125,8 +125,8 @@ class InvoiceItem extends StatelessWidget {
                 GestureDetector(
                   onTap: onRemove,
                   child: SizedBox(
-                    height: 20,
-                    width: 20,
+                    height: 30,
+                    // width: 30,
                     child: SvgPicture.asset('assets/img/cancel.svg'),
                   )
                 ),

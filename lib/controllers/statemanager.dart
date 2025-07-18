@@ -186,18 +186,25 @@ class Statemaneger extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> uploadedFiles = [
+  List<String> invoices = [
     'invoice-darulsehat.pdf',
     'invoice-essalabs.pdf',
   ];
 
   addFile() {
-    uploadedFiles.add('invoice-${uploadedFiles.length + 1}.pdf');
+    invoices.add('invoice-${invoices.length + 1}.pdf');
     notifyListeners();
   }
 
   removeFile(int index) {
-    uploadedFiles.removeAt(index);
+    invoices.removeAt(index);
+    notifyListeners();
+  }
+
+  String? filetype = '';
+  filetypetext(String val) {
+    filetype = val;
+    print(filetype);
     notifyListeners();
   }
 
@@ -233,6 +240,24 @@ class Statemaneger extends ChangeNotifier {
       processbottom = 0;
     } else {
       processbottom = -500;
+    }
+    notifyListeners();
+  }
+
+  // -------------------- Claims file upload popup --------------------
+  bool fileuploadpopup = false;
+  showfileupload(bool val) {
+    fileuploadpopup = val;
+    notifyListeners();
+  }
+
+  // -------------------- dependents accordian --------------------
+  int defaultdependent = 0;
+  showdependentdetails(int id) {
+    if (defaultdependent == id) {
+      defaultdependent = 0;
+    } else {
+      defaultdependent = id;
     }
     notifyListeners();
   }

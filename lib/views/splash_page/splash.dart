@@ -1,5 +1,6 @@
 import 'package:crescent_care/utils/constants.dart';
 import 'package:crescent_care/views/login_page/login.dart';
+// import 'package:crescent_care/views/login_page/popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -207,24 +208,68 @@ class _SplashScreenState extends State<SplashScreen>
                                   ),
 
                                   SizedBox(height: 10.h),
-                                  Container(
-                                    height: 45.h,
-                                    width: 260.w,
-                                    decoration: BoxDecoration(
-                                      // color: theme.secondaryContainer,
-                                      borderRadius: BorderRadius.circular(30.r),
-                                      border: Border.all(
-                                        color: theme.secondaryContainer,
-                                        width: 1,
+                                  GestureDetector(
+                                    onTap: () {
+                                      // showGeneralDialog(
+                                      //   context: context,
+                                      //   barrierDismissible: true,
+                                      //   barrierLabel: "Popup",
+                                      //   barrierColor: Colors.black54,
+                                      //   transitionDuration: Duration(
+                                      //     milliseconds: 400,
+                                      //   ),
+                                      //   pageBuilder: (context, anim1, anim2) {
+                                      //     return Align(
+                                      //       alignment: Alignment.center,
+                                      //       child: CorporatePopup(),
+                                      //     );
+                                      //   },
+                                      //   transitionBuilder: (
+                                      //     context,
+                                      //     anim1,
+                                      //     anim2,
+                                      //     child,
+                                      //   ) {
+                                      //     final offsetTween = Tween<Offset>(
+                                      //       begin: Offset(0, -1),
+                                      //       end: Offset.zero,
+                                      //     );
+                                      //     return SlideTransition(
+                                      //       position: offsetTween.animate(
+                                      //         CurvedAnimation(
+                                      //           parent: anim1,
+                                      //           curve: Curves.easeOut,
+                                      //         ),
+                                      //       ),
+                                      //       child: FadeTransition(
+                                      //         opacity: anim1,
+                                      //         child: child,
+                                      //       ),
+                                      //     );
+                                      //   },
+                                      // );
+                                    },
+                                    child: Container(
+                                      height: 45.h,
+                                      width: 260.w,
+                                      decoration: BoxDecoration(
+                                        // color: theme.secondaryContainer,
+                                        borderRadius: BorderRadius.circular(
+                                          30.r,
+                                        ),
+                                        border: Border.all(
+                                          color: theme.secondaryContainer,
+                                          width: 1,
+                                        ),
                                       ),
-                                    ),
-                                    child: Center(
-                                      child: TextWidget(
-                                        size: medium,
-                                        fontWeight: mediumWeight,
-                                        lineheight: lineMedium,
-                                        color: theme.secondaryContainer,
-                                        val: 'Corporate',
+                                      child: Center(
+                                        child: TextWidget(
+                                          size: medium,
+                                          fontWeight: mediumWeight,
+                                          lineheight: lineMedium,
+                                          color: theme.secondaryContainer,
+                                          val: 'Corporate',
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -273,6 +318,4 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
   }
-
-  
 }

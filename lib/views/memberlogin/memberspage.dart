@@ -3,6 +3,7 @@ import 'package:crescent_care/utils/constants.dart';
 import 'package:crescent_care/utils/navbar.dart';
 import 'package:crescent_care/views/memberlogin/claims/claimspage.dart';
 import 'package:crescent_care/views/memberlogin/dashboard/members_dashboard.dart';
+import 'package:crescent_care/views/memberlogin/profile/profilepage.dart';
 import 'package:crescent_care/views/memberlogin/tabbar.dart';
 import 'package:crescent_care/views/memberlogin/utilization/utilizationpage.dart';
 import 'package:flutter/material.dart';
@@ -77,9 +78,12 @@ class Memberspage extends StatelessWidget {
                   SizedBox(height: 10.h),
                   provider.selected == 1
                       ? MembersDashboard()
+                      : provider.selected == 2
+                      ? Profilepage()
                       : provider.selected == 3
                       ? Utilizationpage()
                       : Expanded(child: Claimspage()),
+                      SizedBox(height: 70,)
                 ],
               ),
             ),

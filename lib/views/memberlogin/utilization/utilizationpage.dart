@@ -19,79 +19,81 @@ class Utilizationpage extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width - 40,
         padding: EdgeInsets.symmetric(vertical: 10),
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const PolicyPopupWidget(),
-                );
-              },
-              child: Row(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const PolicyPopupWidget(),
+                  );
+                },
+                child: Row(
+                  children: [
+                    TextWidget(
+                      size: body,
+                      fontWeight: semiBold,
+                      lineheight: linesmall,
+                      color: theme.primary,
+                      val: 'Policy:',
+                    ),
+                    SizedBox(width: 10.w),
+                    TextWidget(
+                      size: medium,
+                      fontWeight: mediumWeight,
+                      lineheight: linesmall,
+                      color: Color(0xff757575),
+                      val:
+                          provider.currentpolicy == 1
+                              ? 'Parents  Hospitalization'
+                              : provider.currentpolicy == 2
+                              ? 'Family Hospitalization '
+                              : 'Out-Patient',
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20.h),
+              utilizationlimit(label: 'Limit', value: '1,200,000'),
+              SizedBox(height: 10.h),
+              Row(
                 children: [
-                  TextWidget(
-                    size: body,
-                    fontWeight: semiBold,
-                    lineheight: linesmall,
-                    color: theme.primary,
-                    val: 'Policy:',
+                  Expanded(
+                    child: utilizationlimit(
+                      label: 'Utilization',
+                      value: '150,000',
+                    ),
                   ),
                   SizedBox(width: 10.w),
-                  TextWidget(
-                    size: medium,
-                    fontWeight: mediumWeight,
-                    lineheight: linesmall,
-                    color: Color(0xff757575),
-                    val:
-                        provider.currentpolicy == 1
-                            ? 'Parents  Hospitalization'
-                            : provider.currentpolicy == 2
-                            ? 'Family Hospitalization '
-                            : 'Out-Patient',
+                  Expanded(
+                    child: utilizationlimit(label: 'Balance', value: '1,050,000'),
                   ),
                 ],
               ),
-            ),
-            SizedBox(height: 20.h),
-            utilizationlimit(label: 'Limit', value: '1,200,000'),
-            SizedBox(height: 10.h),
-            Row(
-              children: [
-                Expanded(
-                  child: utilizationlimit(
-                    label: 'Utilization',
-                    value: '150,000',
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                Expanded(
-                  child: utilizationlimit(label: 'Balance', value: '1,050,000'),
-                ),
-              ],
-            ),
-            SizedBox(height: 20.h),
-            IndividualUtilizationCard(
-              name: 'Muhammad Zuhair Haider',
-              limitAmount: '3000',
-              utilizationAmount: '2000',
-              balanceAmount: '1000',
-            ),
-            SizedBox(height: 10.h),
-            IndividualUtilizationCard(
-              name: 'Syed Rabab Raza',
-              limitAmount: '3000',
-              utilizationAmount: '00',
-              balanceAmount: '3000',
-            ),
-            SizedBox(height: 10.h),
-            IndividualUtilizationCard(
-              name: 'Muhammad Zuhair Haider',
-              limitAmount: '3000',
-              utilizationAmount: '2500',
-              balanceAmount: '500',
-            ),
-          ],
+              SizedBox(height: 20.h),
+              IndividualUtilizationCard(
+                name: 'Muhammad Zuhair Haider',
+                limitAmount: '3000',
+                utilizationAmount: '2000',
+                balanceAmount: '1000',
+              ),
+              SizedBox(height: 10.h),
+              IndividualUtilizationCard(
+                name: 'Syed Rabab Raza',
+                limitAmount: '3000',
+                utilizationAmount: '00',
+                balanceAmount: '3000',
+              ),
+              SizedBox(height: 10.h),
+              IndividualUtilizationCard(
+                name: 'Muhammad Zuhair Haider',
+                limitAmount: '3000',
+                utilizationAmount: '2500',
+                balanceAmount: '500',
+              ),
+            ],
+          ),
         ),
       ),
     );

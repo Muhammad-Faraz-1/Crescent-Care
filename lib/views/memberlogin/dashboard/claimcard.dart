@@ -36,7 +36,7 @@ class ClaimCard extends StatelessWidget {
                     child:   Text(
                       '00001277920',
                       style: TextStyle(
-                        fontSize: 8.sp,
+                        fontSize: 10.sp,
                         fontWeight: FontWeight.w400,
                         fontFamily: 'Poppins',
                         height: 1.5,
@@ -55,7 +55,7 @@ class ClaimCard extends StatelessWidget {
                     child:   Text(
                       'Self',
                       style: TextStyle(
-                        fontSize: 8.sp,
+                        fontSize: 10.sp,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Poppins',
                         height: 1.5,
@@ -68,7 +68,7 @@ class ClaimCard extends StatelessWidget {
               // Optional Icon/Image
               SizedBox(
                 width: 16.w,
-                height: 16.h,
+                // height: 16.h,
                 child: Image.asset('assets/img/eye.png'), // update path accordingly
               ),
             ],
@@ -88,7 +88,7 @@ class ClaimCard extends StatelessWidget {
                     child: Text(
                       'Muhammad Zuhair Haider',
                       style: TextStyle(
-                        fontSize: 10.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Poppins',
                         height: 1.2,
@@ -101,7 +101,7 @@ class ClaimCard extends StatelessWidget {
                     child: Text(
                       'SMCHSM100041/02',
                       style: TextStyle(
-                        fontSize: 8.sp,
+                        fontSize: 10.sp,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Poppins',
                         height: 1.25,
@@ -119,7 +119,7 @@ class ClaimCard extends StatelessWidget {
                   Text(
                     'Claim Amount',
                     style: TextStyle(
-                      fontSize: 8.sp,
+                      fontSize: 10.sp,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Poppins',
                       height: 1.43,
@@ -129,7 +129,7 @@ class ClaimCard extends StatelessWidget {
                   Text(
                     'Rs 2,000',
                     style: TextStyle(
-                      fontSize: 10.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Poppins',
                       height: 1.2,
@@ -149,7 +149,7 @@ class ClaimCard extends StatelessWidget {
                 child:   Text(
                   'Approved',
                   style: TextStyle(
-                    fontSize: 8.sp,
+                    fontSize: 10.sp,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Poppins',
                     height: 1.25,
